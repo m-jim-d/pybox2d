@@ -23,6 +23,9 @@
 
 b2Version b2_version = {2, 3, 0};
 
+// Velocity threshold for elastic collisions (default 1.0f)
+float32 b2_velocityThreshold = 1.0f;
+
 // Memory allocators. Modify these to use your own allocator.
 void* b2Alloc(int32 size)
 {

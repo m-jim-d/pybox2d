@@ -1,0 +1,91 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [master, main]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install SWIG (Ubuntu)
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y swig
+
+    - name: Install SWIG (macOS)
+      if: runner.os == 'macOS'
+      run: brew install swig
+
+    - name: Install SWIG (Windows)
+      if: runner.os == 'Windows'
+      run: choco install swig -y
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel pytest build
+
+    - name: Build package
+      run: python setup.py build
+
+    - name: Install package
+      run: pip install .
+
+    - name: Test import
+      run: |
+        python -c "import Box2D; print('Box2D imported successfully')"
+        python -c "from Box2D import b2Globals; print('b2_velocityThreshold:', b2Globals.b2_velocityThreshold)"
+
+    - name: Run tests
+      run: pytest -vv --pyargs Box2D.tests
+
+    - name: Build wheel
+      run: pip wheel . -w dist/ --no-deps
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: wheel-${{ matrix.os }}-py${{ matrix.python-version }}
+        path: dist/*.whl
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: dist
+        pattern: wheel-*
+        merge-multiple: true
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*.whl
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
