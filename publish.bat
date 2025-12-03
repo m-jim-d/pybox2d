@@ -4,4 +4,4 @@
 
 git add .
 git commit -am "readme updated"
-git push origin main
+git push origin master
