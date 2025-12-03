@@ -1,24 +1,28 @@
-[![Build Status](https://travis-ci.org/pybox2d/pybox2d.svg?branch=master)](https://travis-ci.org/pybox2d/pybox2d) [![Coverage Status](https://coveralls.io/repos/pybox2d/pybox2d/badge.svg?branch=master&service=github)](https://coveralls.io/github/pybox2d/pybox2d?branch=master)
-
 pybox2d
 -------
 2D Game Physics for Python
 
-https://github.com/pybox2d/pybox2d
+https://github.com/m-jim-d/pybox2d
 
 How to get it
 -------------
 
-pybox2d is available on conda-forge with the package name `pybox2d`.
-To create a new conda environment with pybox2d, run the following:
+First, download and install Miniconda:
+https://www.anaconda.com/download/success#miniconda
+
+To create a new conda environment with pybox2d, run the following from an Anaconda prompt:
 
 ```bash
-$ conda create -n pybox2d -c conda-forge python=3.6 pybox2d
+$ conda create -n pybox2d -c conda-forge python=3.11
 $ conda activate pybox2d
+# Windows example (Python 3.11):
+$ pip install https://github.com/m-jim-d/pybox2d/releases/download/v2.3.10/box2d-2.3.10-cp311-cp311-win_amd64.whl
+# For other platforms/versions, see: https://github.com/m-jim-d/pybox2d/releases
+$ pip install pygame-ce
 ```
 
-Recent builds should be available for Windows, Linux, and OS X, with Python
-3.6, 3.7, and 3.8.
+Recent builds should be available for Windows, Linux, and MacOS, with Python
+3.6, 3.8, 3.9, 3.10, and 3.11.
 
 What is it?
 -----------
@@ -27,33 +31,33 @@ based on the Box2D library, written in C++. It supports several shape types
 (circle, polygon, thin line segments), and quite a few joint types (revolute,
 prismatic, wheel, etc.).
 
+This version of pybox2d originates from [pybox2d/pybox2d](https://github.com/pybox2d/pybox2d) and most recently a fork from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). This modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at runtime (see [issue #75](https://github.com/pybox2d/pybox2d/issues/75)). Setting this to zero is useful for applications like pool games where there is no gravity and no settling stack of objects. This setting will keep low-velocity objects from sticking to walls.
+
+An example of how to implement this feature in Python can be found in the [pet-code](https://github.com/m-jim-d/pet-code) repository (search on "threshold" in A16c_2D_B2D_serverN.py, A15_environment.py, and A15_air_table.py).
+
 Getting Started
 ---------------
-For building instructions, see [INSTALL.md](INSTALL.md). Check out the testbed
-[examples](examples) to see what pybox2d can do. Then take a
-look at the 
-[getting started manual](https://github.com/pybox2d/pybox2d/wiki/manual)
-located on the pybox2d wiki.
+Check out the testbed [examples](https://github.com/m-jim-d/pybox2d/tree/master/library/Box2D/examples) to see what pybox2d can do. Then take a look at the [getting started manual](https://github.com/pybox2d/pybox2d/wiki/manual) located on the pybox2d wiki.
 
 Bugs
 ----
 Please submit any bugs that you find to the 
-[issue tracker](https://github.com/pybox2d/pybox2d/issues).
+[issue tracker](https://github.com/m-jim-d/pybox2d/issues).
 
 Testbed examples
 ----------------
 
 You can browse the testbed examples on GitHub
-[here](https://github.com/pybox2d/pybox2d/tree/master/library/Box2D/examples)
+[here](https://github.com/m-jim-d/pybox2d/tree/master/library/Box2D/examples)
 
 1. Install a backend such as pygame or pyglet to use as a renderer.
 
     | Backend        | Install                                                       | Homepage                             |
     | -------------  | ------------------------------------------------------------- | ------------------------------------ |
-    | pygame         | `pip install pygame`                                          | http://pygame.org                    |  
-    | pyqt4          | `conda install pyqt4`                                         | https://www.riverbankcomputing.com/  |
+    | pygame         | `pip install pygame-ce`                                       | http://pygame.org                    |  
+    | pyqt5          | `pip install pyqt5`                                           | https://www.riverbankcomputing.com/  |
     | pyglet         | `pip install pyglet` (or use conda-forge)                     | http://pyglet.org                    |
-    | opencv         | `pip install opencv`                                          | http://opencv.org                    |
+    | opencv         | `pip install opencv-python`                                   | http://opencv.org                    |
 
 2. Run your first example with the pygame backend:
     ```bash
@@ -111,7 +115,7 @@ yourself.
 For example, the following would be possible:
 
 ```bash
-$ git clone https://github.com/pybox2d/pybox2d pybox2d
+$ git clone https://github.com/m-jim-d/pybox2d pybox2d
 $ mkdir my_new_examples
 $ cp -R pybox2d/library/Box2D/examples/* my_new_examples
 $ cd my_new_examples
@@ -123,7 +127,7 @@ Simple examples
 
 There are also some simple examples that are not weighed down by testbed architecture.
 You can browse them on GitHub
-[here](https://github.com/pybox2d/pybox2d/tree/master/library/Box2D/examples/simple)
+[here](https://github.com/m-jim-d/pybox2d/tree/master/library/Box2D/examples/simple)
 
 These can also be run directly from your pybox2d installation:
 
