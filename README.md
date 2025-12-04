@@ -31,9 +31,19 @@ based on the Box2D library, written in C++. It supports several shape types
 (circle, polygon, thin line segments), and quite a few joint types (revolute,
 prismatic, wheel, etc.).
 
-This version of pybox2d originates from [pybox2d/pybox2d](https://github.com/pybox2d/pybox2d) and most recently a fork from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). This modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at runtime (see [issue #75](https://github.com/pybox2d/pybox2d/issues/75)). Setting this to zero is useful for applications like pool games where there is no gravity and no settling stack of objects. This setting will keep low-velocity objects from sticking to walls.
+This version of pybox2d originates from
+[pybox2d/pybox2d](https://github.com/pybox2d/pybox2d) and most recently a fork
+from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). This
+modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at
+runtime (see [issue #75](https://github.com/pybox2d/pybox2d/issues/75)). Setting
+this to zero is useful for applications like pool games where there is no
+gravity and no settling stack of objects, keeping
+low-velocity objects from sticking to walls.
 
-An example of how to implement this feature in Python can be found in the [pet-code](https://github.com/m-jim-d/pet-code) repository (search on "threshold" in A16c_2D_B2D_serverN.py, A15_environment.py, and A15_air_table.py).
+An example of how to implement this feature in Python can be found in the
+[pet-code](https://github.com/m-jim-d/pet-code) repository (search on
+"threshold" in A16c_2D_B2D_serverN.py, A15_environment.py, and
+A15_air_table.py).
 
 Getting Started
 ---------------
