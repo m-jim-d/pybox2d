@@ -36,9 +36,8 @@ This version of pybox2d originates from
 from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). This
 modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at
 runtime (see [issue #75](https://github.com/pybox2d/pybox2d/issues/75)). Setting
-this to zero is useful for applications like pool games where there is no
-gravity and no settling stack of objects, keeping
-low-velocity objects from sticking to walls.
+this to zero is useful for keeping low-velocity objects from sticking to walls.
+This is most apparent in applications like pool games where there are no gravitational effects.
 
 An example of how to implement this feature in Python can be found in the
 [pet-code](https://github.com/m-jim-d/pet-code) repository (search on
