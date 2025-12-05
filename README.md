@@ -45,7 +45,13 @@ An example of how to implement this threshold feature in Python can be found in 
 "threshold" in A16c_2D_B2D_serverN.py, A15_environment.py, and
 A15_air_table.py).
 
-This version of pybox2d also includes fixes to the contact-normal rendering in the testbed framework (see [issue #57](https://github.com/pybox2d/pybox2d/issues/57)). The original code had three bugs: normals were drawn at incorrect angles due to a screen-coordinate Y-flip issue, some normals appeared at the origin instead of at actual contact points, and vector arithmetic failed due to a type mismatch. These fixes ensure contact normals display correctly when debugging physics interactions.
+This version of pybox2d also includes fixes to the contact-normal rendering in
+the testbed framework (see [issue
+#57](https://github.com/pybox2d/pybox2d/issues/57)). The original code had three
+bugs: normals were drawn at incorrect angles due to a screen-coordinate Y-flip
+issue, some normals appeared at the origin instead of at actual contact points,
+and vector arithmetic failed due to a type mismatch. These fixes ensure contact
+normals display correctly.
 
 
 Getting Started
