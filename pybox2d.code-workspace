@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../box_collision_P3"
+		},
+		{
+			"path": "C:/Users/Jim/miniconda3/envs/jimphysics/Lib/site-packages/Box2D"
 		}
 	],
 	"settings": {}

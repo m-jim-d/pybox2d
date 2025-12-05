@@ -20,6 +20,11 @@
 
 """
 The framework's base is FrameworkBase. See its help for more information.
+
+Contact Normal Fixes (Dec 2025):
+  1. PreSolve: Wrap position in b2Vec2() to enable vector arithmetic with normal
+  2. PreSolve: Iterate only over manifold.pointCount to avoid uninitialized points
+  3. Step: Compute normal endpoint in world space before screen conversion (Y-flip fix)
 """
 from time import time
 
@@ -244,7 +249,8 @@ class FrameworkBase(b2ContactListener):
             if settings.drawContactNormals:
                 for point in self.points:
                     p1 = renderer.to_screen(point['position'])
-                    p2 = renderer.axisScale * point['normal'] + p1
+                    # Fix: compute p2 in world space before screen conversion (Y-flip)
+                    p2 = renderer.to_screen(point['position'] + 0.5 * point['normal'])
                     renderer.DrawSegment(p1, p2, self.colors['contact_normal'])
 
             renderer.EndDraw()
@@ -458,13 +464,15 @@ class FrameworkBase(b2ContactListener):
         worldManifold = contact.worldManifold
 
         # TODO: find some way to speed all of this up.
+        # Fix: wrap position in b2Vec2() for vector arithmetic; iterate only over
+        # manifold.pointCount to avoid uninitialized (0,0) positions
         self.points.extend([dict(fixtureA=contact.fixtureA,
                                  fixtureB=contact.fixtureB,
-                                 position=worldManifold.points[i],
+                                 position=b2Vec2(worldManifold.points[i]),
                                  normal=worldManifold.normal.copy(),
                                  state=state2[i],
                                  )
-                            for i, point in enumerate(state2)])
+                            for i in range(manifold.pointCount) if state2[i]])
 
     # These can/should be implemented in the test subclass: (Step() also if necessary)
     # See empty.py for a simple example.
