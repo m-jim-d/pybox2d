@@ -3,6 +3,10 @@ name: Build and Release
 on:
   push:
     branches: [master, main]
+    paths-ignore:
+      - '*.md'
+      - 'README*'
+      - 'docs/**'
     tags:
       - 'v*'
   pull_request:
