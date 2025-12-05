@@ -30,7 +30,7 @@ class build_py_after_build_ext(build_py):
 
 # release version number
 box2d_version  = '2.3'
-release_number = 10
+release_number = 13
 
 # create the version string
 version_str = "%s.%s" % (box2d_version, release_number)
