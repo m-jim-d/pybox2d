@@ -7,6 +7,7 @@ on:
       - '*.md'
       - 'README*'
       - 'docs/**'
+      - 'publish.bat'
     tags:
       - 'v*'
   pull_request:

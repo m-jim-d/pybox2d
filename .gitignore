@@ -6,3 +6,4 @@ dist/*
 *.so
 Box2D.py
 _Box2D.pyd
+*.code-workspace

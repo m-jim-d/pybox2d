@@ -16,7 +16,7 @@ To create a new conda environment with pybox2d, run the following from an Anacon
 $ conda create -n pybox2d -c conda-forge python=3.11
 $ conda activate pybox2d
 # Windows example (Python 3.11):
-$ pip install https://github.com/m-jim-d/pybox2d/releases/download/v2.3.10/box2d-2.3.10-cp311-cp311-win_amd64.whl
+$ pip install https://github.com/m-jim-d/pybox2d/releases/download/v2.3.13/box2d-2.3.13-cp311-cp311-win_amd64.whl
 # For other platforms/versions, see: https://github.com/m-jim-d/pybox2d/releases
 $ pip install pygame-ce
 ```
@@ -33,16 +33,20 @@ prismatic, wheel, etc.).
 
 This version of pybox2d originates from
 [pybox2d/pybox2d](https://github.com/pybox2d/pybox2d) and most recently a fork
-from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). This
-modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at
+from [Car-Role/pybox2d-test](https://github.com/Car-Role/pybox2d-test). 
+
+This modified version allows `b2Globals.b2_velocityThreshold` to be adjusted at
 runtime (see [issue #75](https://github.com/pybox2d/pybox2d/issues/75)). Setting
 this to zero is useful for keeping low-velocity objects from sticking to walls.
 This is most apparent in applications like pool games where there are no gravitational effects.
 
-An example of how to implement this feature in Python can be found in the
+An example of how to implement this threshold feature in Python can be found in the
 [pet-code](https://github.com/m-jim-d/pet-code) repository (search on
 "threshold" in A16c_2D_B2D_serverN.py, A15_environment.py, and
 A15_air_table.py).
+
+This version of pybox2d also includes fixes to the contact-normal rendering in the testbed framework (see [issue #57](https://github.com/pybox2d/pybox2d/issues/57)). The original code had three bugs: normals were drawn at incorrect angles due to a screen-coordinate Y-flip issue, some normals appeared at the origin instead of at actual contact points, and vector arithmetic failed due to a type mismatch. These fixes ensure contact normals display correctly when debugging physics interactions.
+
 
 Getting Started
 ---------------
