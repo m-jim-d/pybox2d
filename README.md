@@ -13,8 +13,8 @@ https://www.anaconda.com/download/success#miniconda
 To create a new conda environment with pybox2d, run the following from an Anaconda prompt:
 
 ```bash
-$ conda create -n pybox2d -c conda-forge python=3.11
-$ conda activate pybox2d
+$ conda create -n physics -c conda-forge python=3.11
+$ conda activate physics
 # Windows example (Python 3.11):
 $ pip install https://github.com/m-jim-d/pybox2d/releases/download/v2.3.13/box2d-2.3.13-cp311-cp311-win_amd64.whl
 # For other platforms/versions, see: https://github.com/m-jim-d/pybox2d/releases
